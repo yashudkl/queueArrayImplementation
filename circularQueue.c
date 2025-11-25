@@ -33,20 +33,20 @@ void enqueue(struct circularQueue *q , int value){
     else{
         q->rear = (q->rear + 1) % q->size;
         q->arr[q->rear] = value;
+        printf("Enqueued element %d \n",value);
     }
 }
 
 
-int dequeue(struct circularQueue * q){
+void dequeue(struct circularQueue * q){
     int val = 0;
     if(isEmpty(q)){
         printf("circularQueue is Empty");
-        return -1;
     }
     else{
-        q->front = (q->front) % q->size;
+        q->front = (q->front + 1) % q->size;
         val = q->arr[q->front];
-        return val;
+        printf("Dequeued element %d \n",val);
     }
 }
 void display(struct circularQueue *q){
@@ -60,11 +60,17 @@ int main(int argc, char const *argv[])
     q->arr = (int *)malloc(q->size * sizeof(int));
    
    q->rear = 0;
-   q->front = -1;
+   q->front = 0;
     enqueue(q,10);
     enqueue(q,20);
     enqueue(q,30);
+   
+    dequeue(q);
+    dequeue(q);
+    dequeue(q);
+    
+    
   
-printf("Dequeued %d",dequeue(q));
+
 
 }
